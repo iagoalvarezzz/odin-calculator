@@ -1,7 +1,10 @@
 
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@550&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap");
+
 html,body{
   height: 100%;
   font-size: 24px;
+  font-family: "Montserrat";
 }
 
 
@@ -14,26 +17,57 @@ body{
 
 button{
   height: 80px;
+  font-size: 20px;
   width: 19.5%;
-  border-radius: 25px;
+  border-radius: 15px;
   border: 2px solid black;
-  margin-bottom: 0.5%;
+
 }
 
 #calculator{
+  height: 500px;
+  border: 10px solid black;
+  border-radius: 10px;
+  padding: 30px;
+  border-radius: 40px;
   display: flex;
   flex-wrap: wrap;
   gap: 0.5%;
   width: 500px;
+  background-color: rgb(242, 156, 163);
+  align-items: center;
 }
 
 #display{
-  text-align: right;
-  border: 1px solid black;
-  min-height: 20%;
+  font-size: 50px;
+  border: 5px solid black;
+  background-color: rgb(96, 175, 255);
+  border-radius: 10px;
+  height: 20%;
   width: 100%;
   margin-bottom: 2%;
+  display: flex;
+  align-items: center;
+  justify-content: right;
 }
 
+#operate{
+  margin-bottom: -88px;
+  height: 178px;
+  align-self: flex-end;
+}
+
+.digits{
+  background-color: rgb(144, 0, 210);
+  color: white;
+}
+
+.operators{
+  background-color: rgb(221, 255, 247);
+}
+
+#operate, #signChanger, #float, #clear, #delete{
+  background-color: rgb(221, 255, 247);
+}
 
 
