@@ -1,11 +1,11 @@
-const digits = document.querySelector("#digits");
+const digits = document.querySelectorAll(".digits");
 const displayButton = document.querySelector("#display");
 const operateButton = document.querySelector("#operate");
-const operators = document.querySelector("#operators");
+const operators = document.querySelectorAll(".operators");
 const clearButton = document.querySelector("#clear");
 
-let firstNumber = 0;
-let secondNumber = 0;
+let firstNumber = null;
+let secondNumber = null;
 let selectedOperator = '';
 let display = '';
 //justOperated is to make it work right when you operate and next introduce a new number
@@ -51,32 +51,40 @@ function clearDisplay(){
 }
 
 function clearData(){
-  firstNumber = 0;
-  secondNumber = 0;
+  firstNumber = null;
+  secondNumber = null;
   selectedOperator = "";
 }
 
-digits.addEventListener("click", (event) =>{
-  if (event.target.localName !== "button")
-    return;
-  if (justOperated === true){
-    clearDisplay();
+//digits event listener
+digits.forEach(digit => {
+  digit.addEventListener("click", (event) =>{
+    if (justOperated === true){
+      clearDisplay();
+      updateDisplay();
+    }
+    justOperated = false;
+    let digit = event.target.id.at(1);
+    display = display + digit.toString();
     updateDisplay();
-  }
-  justOperated = false;
-  let digit = event.target.id.at(1);
-  display = display + digit.toString();
-  updateDisplay();
+  });
 });
 
-operators.addEventListener("click", (event) =>{
-  if (event.target.localName !== "button")
-    return;
-  firstNumber = parseInt(display);
-  selectedOperator = event.target.id;
-  clearDisplay();
+//operators event listener
+operators.forEach(operator => {
+  operator.addEventListener("click", (event) =>{
+    if (event.target.localName !== "button")
+      return;
+    if (firstNumber !== null){
+      operateButton.click();
+    }
+    firstNumber = parseInt(display);
+    selectedOperator = event.target.id;
+    clearDisplay();
+  });
 });
 
+//operate event listener
 operateButton.addEventListener("click", () => {
   secondNumber = parseInt(display);
   clearDisplay();
@@ -86,6 +94,7 @@ operateButton.addEventListener("click", () => {
   justOperated = true;
 });
 
+//clear event listener
 clearButton.addEventListener("click", () => {
   clearData();
   clearDisplay();
