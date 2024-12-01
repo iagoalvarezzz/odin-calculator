@@ -1,5 +1,5 @@
 const digits = document.querySelectorAll(".digits");
-const displayButton = document.querySelector("#display");
+const displayElement = document.querySelector("#display");
 const operateButton = document.querySelector("#operate");
 const operators = document.querySelectorAll(".operators");
 const clearButton = document.querySelector("#clear");
@@ -7,7 +7,7 @@ const clearButton = document.querySelector("#clear");
 let firstNumber = null;
 let secondNumber = null;
 let selectedOperator = '';
-let display = '';
+let display = "";
 //justOperated is to make it work right when you operate and next introduce a new number
 let justOperated = false;
 
@@ -43,7 +43,7 @@ function operate(operator, n1, n2){
 }
 
 function updateDisplay(){
-  displayButton.textContent = display;
+  displayElement.textContent = display;
 }
 
 function clearDisplay(){
@@ -99,4 +99,5 @@ clearButton.addEventListener("click", () => {
   clearData();
   clearDisplay();
   updateDisplay();
+  displayElement.textContent = "0";
 })

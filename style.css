@@ -24,7 +24,7 @@ button{
   display: flex;
   flex-wrap: wrap;
   gap: 0.5%;
-  width: 30%;
+  width: 500px;
 }
 
 #display{
