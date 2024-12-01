@@ -1,13 +1,15 @@
 const digits = document.querySelector("#digits");
-const displayElement = document.querySelector("#display");
-const operateElement = document.querySelector("#operate");
+const displayButton = document.querySelector("#display");
+const operateButton = document.querySelector("#operate");
 const operators = document.querySelector("#operators");
+const clearButton = document.querySelector("#clear");
 
 let firstNumber = 0;
 let secondNumber = 0;
-let lastResult = 0;
 let selectedOperator = '';
 let display = '';
+//justOperated is to make it work right when you operate and next introduce a new number
+let justOperated = false;
 
 function add(a,b){
   return a + b;
@@ -41,31 +43,51 @@ function operate(operator, n1, n2){
 }
 
 function updateDisplay(){
-  displayElement.textContent = display;
+  displayButton.textContent = display;
 }
 
 function clearDisplay(){
   display = "";
 }
 
+function clearData(){
+  firstNumber = 0;
+  secondNumber = 0;
+  selectedOperator = "";
+}
+
 digits.addEventListener("click", (event) =>{
+  if (event.target.localName !== "button")
+    return;
+  if (justOperated === true){
+    clearDisplay();
+    updateDisplay();
+  }
+  justOperated = false;
   let digit = event.target.id.at(1);
   display = display + digit.toString();
   updateDisplay();
 });
 
 operators.addEventListener("click", (event) =>{
+  if (event.target.localName !== "button")
+    return;
   firstNumber = parseInt(display);
   selectedOperator = event.target.id;
   clearDisplay();
 });
 
-operateElement.addEventListener("click", () => {
+operateButton.addEventListener("click", () => {
   secondNumber = parseInt(display);
   clearDisplay();
-  lastResult = operate(selectedOperator, firstNumber, secondNumber);
-  display = lastResult;
-  selectedOperator = "";
+  display = operate(selectedOperator, firstNumber, secondNumber);
   updateDisplay();
+  clearData();
+  justOperated = true;
 });
 
+clearButton.addEventListener("click", () => {
+  clearData();
+  clearDisplay();
+  updateDisplay();
+})
